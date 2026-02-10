@@ -1,0 +1,102 @@
+# Default configuration for Genre-Adaptive NLI Summarization Validator
+
+# Model configuration
+model:
+  name: "microsoft/deberta-v3-base"
+  nli_model: "microsoft/deberta-v3-large-mnli"
+  max_length: 512
+  dropout: 0.1
+  num_labels: 3
+  genre_adaptation_layers: 2
+  genre_embedding_dim: 128
+  genre_attention_heads: 8
+  cross_genre_regularization: 0.1
+  temperature_scaling: true
+  init_std: 0.02
+
+# Data configuration
+data:
+  cache_dir: "./data/cache"
+  max_train_samples: 10000
+  max_val_samples: 2000
+  max_test_samples: 2000
+  text_column: "text"
+  summary_column: "summary"
+  label_column: "label"
+  genre_column: "genre"
+  negative_sampling_ratio: 0.3
+  test_size: 0.2
+  val_size: 0.1
+  cnn_dm_version: "3.0.0"
+  create_balanced_splits: true
+  preprocessing:
+    min_summary_length: 10
+    max_summary_length: 512
+    min_document_length: 50
+    remove_duplicates: true
+
+# Training configuration
+training:
+  output_dir: "./checkpoints"
+  num_epochs: 5
+  batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  save_steps: 1000
+  eval_steps: 500
+  logging_steps: 100
+  save_total_limit: 3
+  load_best_model_at_end: true
+  metric_for_best_model: "entailment_auc"
+  greater_is_better: true
+  early_stopping_patience: 3
+  fp16: true
+  dataloader_num_workers: 2
+  seed: 42
+
+# Evaluation configuration
+evaluation:
+  metrics: ["accuracy", "f1", "precision", "recall", "auc"]
+  genre_specific_eval: true
+  threshold_tuning: true
+  bootstrap_samples: 1000
+  classification_threshold: 0.5
+  early_stopping_min_delta: 0.0
+  plot_alpha: 0.7
+
+# Genre configuration
+genres:
+  fiction: ["fiction", "novel", "story"]
+  news: ["news", "journalism", "newspaper"]
+  academic: ["academic", "scientific", "research"]
+  government: ["government", "legal", "official"]
+  telephone: ["telephone", "conversation", "speech"]
+  travel: ["travel", "guide", "tourism"]
+  slate: ["slate", "magazine", "editorial"]
+  letters: ["letters", "correspondence", "email"]
+  oup: ["oxford", "university", "press"]
+  verbatim: ["verbatim", "transcript", "interview"]
+
+# MLflow configuration
+mlflow:
+  experiment_name: "genre-adaptive-nli-summarization"
+  tracking_uri: "./mlruns"
+  log_model: true
+  log_artifacts: true
+  tags:
+    project: "summarization-validation"
+    approach: "genre-adaptive-nli"
+
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "./logs/training.log"
+
+# Hardware configuration
+device:
+  use_cuda: true
+  mixed_precision: true
+  compile_model: false
