@@ -187,3 +187,4 @@ venv/
 # Training artifacts (auto-added by publisher)
 *.h5
 *.onnx
+*.pyc
