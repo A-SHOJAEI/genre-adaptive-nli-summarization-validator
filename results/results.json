@@ -1,0 +1,82 @@
+{
+  "model": "DeBERTa-v3-base with genre-specific adaptation layers",
+  "dataset": "MultiNLI (6 genres: news, telephone, travel, slate, government, fiction)",
+  "training": {
+    "total_epochs": 5,
+    "best_epoch": 4,
+    "train_loss": 0.1348,
+    "eval_loss": 0.2946
+  },
+  "overall_metrics": {
+    "accuracy": 0.9050,
+    "f1_macro": 0.8937,
+    "f1_micro": 0.9050,
+    "precision_macro": 0.8978,
+    "recall_macro": 0.8903,
+    "auc_ovr": 0.9827,
+    "entailment_auc": 0.9908,
+    "entailment_ap": 0.9901,
+    "hallucination_detection_f1": 0.9498,
+    "genre_transfer_accuracy": 0.5930
+  },
+  "per_class_metrics": {
+    "entailment": {
+      "precision": 0.9290,
+      "recall": 0.9523,
+      "f1": 0.9405
+    },
+    "neutral": {
+      "precision": 0.8847,
+      "recall": 0.8986,
+      "f1": 0.8916
+    },
+    "contradiction": {
+      "precision": 0.8797,
+      "recall": 0.8201,
+      "f1": 0.8488
+    }
+  },
+  "training_progression": {
+    "epoch_0": {
+      "accuracy": 0.8274,
+      "f1_macro": 0.8138,
+      "auc_ovr": 0.9685,
+      "hallucination_detection_f1": 0.9289,
+      "eval_loss": 0.3303,
+      "train_loss": 0.6044
+    },
+    "epoch_1": {
+      "accuracy": 0.8703,
+      "f1_macro": 0.8522,
+      "auc_ovr": 0.9760,
+      "hallucination_detection_f1": 0.9366,
+      "eval_loss": 0.2782,
+      "train_loss": 0.3311
+    },
+    "epoch_2": {
+      "accuracy": 0.8960,
+      "f1_macro": 0.8827,
+      "auc_ovr": 0.9799,
+      "hallucination_detection_f1": 0.9453,
+      "eval_loss": 0.2784,
+      "train_loss": 0.2546
+    },
+    "epoch_3": {
+      "accuracy": 0.9020,
+      "f1_macro": 0.8896,
+      "auc_ovr": 0.9828,
+      "hallucination_detection_f1": 0.9481,
+      "eval_loss": 0.2791,
+      "train_loss": 0.1865
+    },
+    "epoch_4": {
+      "accuracy": 0.9050,
+      "f1_macro": 0.8937,
+      "auc_ovr": 0.9827,
+      "hallucination_detection_f1": 0.9498,
+      "eval_loss": 0.2946,
+      "train_loss": 0.1348
+    }
+  },
+  "checkpoint": "checkpoints/final-model/model.safetensors"
+}

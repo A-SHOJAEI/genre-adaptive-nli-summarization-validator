@@ -141,7 +141,8 @@ mlflow.db
 # Outputs and results
 outputs/
 checkpoints/
-results/
+results/*
+!results/results.json
 
 # IDE
 .vscode/
